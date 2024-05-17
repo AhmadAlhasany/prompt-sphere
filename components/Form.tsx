@@ -5,10 +5,27 @@ import { useState } from 'react'
 
 type FormProps = {
     type: string,
+    id?:number,
     typeAction:(data:{prompt:string, tag:string}) => void
 }
 
-function Form({type, typeAction}:FormProps) {
+type Owner = {
+    id: number;
+    email: string;
+    username: string;
+    image: string;
+  };
+  
+  type MyType = {
+    id: number;
+    owner: Owner;
+    tag: string;
+    body: string;
+    created: string;
+  };
+  
+
+function Form({type,id ,typeAction}:FormProps) {
     const router = useRouter();
     const [form, setFrom] = useState({
         prompt: '',
@@ -36,7 +53,21 @@ function Form({type, typeAction}:FormProps) {
             }
         })
     }
-
+    React.useEffect(()=>{
+        async function initialSet() {
+            let res = await fetch('https://osamadoage.pythonanywhere.com/prompts/')
+            let data = await res.json()
+            let curPrompt: MyType[] = data.filter((cur:MyType)=> id == cur.id)
+            if(curPrompt.length > 0)
+                setFrom({
+                    prompt: curPrompt[0].body,
+                    tag: curPrompt[0].tag
+                })
+        }
+        if(id)
+            initialSet()
+    }
+    ,[id])
   return (
     <form onSubmit={(e)=>handleSubmit(e)} className='pt-[30px] pb-8'>
         <div>

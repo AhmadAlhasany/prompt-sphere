@@ -24,13 +24,13 @@ function Advance(){
   let id:string = '';
   if(searchParams.get('id')){
        id = searchParams.get('id') as string
-      console.log(id)
   }
  return (
   <Form
-  type='Edit'
-  typeAction={editProp}
-/>
+    type='Edit'
+    typeAction={editProp}
+    id= {parseInt(id)}
+  />
  )
 }
 
