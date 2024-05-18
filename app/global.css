@@ -51,7 +51,7 @@ html, body{
 }
 
 .app {
-  @apply relative z-10 flex flex-col max-w-7xl mx-auto sm:px-16 px-6 min-h-[100%];
+  @apply relative z-10 flex flex-col max-w-7xl mx-auto sm:px-16 px-3 min-h-[100%];
 }
 
 .black_btn {

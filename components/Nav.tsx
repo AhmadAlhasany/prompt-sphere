@@ -43,11 +43,14 @@ function Nav() {
                 <div className='sm:hidden block relative'>
                     <img alt='Profile photo' className='hover:cursor-pointer rounded-full w-[50px] h-[50px] border-[1px] border-black' src={session?.user.image as string} onClick={() => setDropdown(pre => !pre)}/>
                     {dropdown && 
-                    <div className='dropdown bg-white'>
-                        <Link href='/profile' className='dropdown_link' onClick={() => setDropdown(false)}>Profile</Link>
-                        <Link href='/create-prompt' className='dropdown_link' onClick={() => setDropdown(false)}>Create Prompt</Link>
-                        <button className='black_btn w-full' onClick={()=> signOut()}>Sign out</button>
-                    </div>}
+                    <>
+                        <div className='bg-black h-[100svh] w-[100svh] absolute opacity-0 right-0 top-[100%]' onClick={()=> setDropdown(false)}></div>
+                        <div className='dropdown bg-white'>
+                            <Link href='/profile' className='dropdown_link' onClick={() => setDropdown(false)}>Profile</Link>
+                            <Link href='/create-prompt' className='dropdown_link' onClick={() => setDropdown(false)}>Create Prompt</Link>
+                            <button className='black_btn w-full' onClick={()=> signOut()}>Sign out</button>
+                        </div>
+                    </>}
                 </div>
             </>
             :
