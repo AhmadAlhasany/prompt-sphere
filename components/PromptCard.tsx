@@ -26,7 +26,7 @@ function PromptCard({image, name, email, prompt, tag, id, show = false, deletePr
       <div>
         <div className='flex-row items-start flex justify-between'>
           <div className='flex-row items-center flex gap-4'>
-            <img src={image} className=' w-[40px] h-[40px] rounded-full'/>
+            <img src={image} className=' w-[40px] h-[40px] rounded-full border-[1px] border-black'/>
             <div className='flex-col text-black font-[500] text-start'>
               {name}
               <span className='block font-[400] text-gray-500'>{email}</span>

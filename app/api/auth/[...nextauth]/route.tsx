@@ -6,20 +6,26 @@ const handler = NextAuth({
         Github({
             clientId: process.env.GITHUB_ID as string,
             clientSecret: process.env.GITHUB_SECRET as string,
-        })
+        }),
     ],
     callbacks:{
         async signIn({profile, user}){
+                let username = profile?.name || user.name
+                let email = profile?.email || user.email
+                let image = profile?.image || user?.image
+                if(!username || !email || !image){
+                    throw new Error('Missing credentials')
+                }
             try{
-                let ress = await fetch('https://osamadoage.pythonanywhere.com/users/create-profile/',{
+                await fetch('https://osamadoage.pythonanywhere.com/users/create-profile/',{
                     method:'POST',
                     headers: {
                       'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                      username: profile?.name,
-                      email: profile?.email,
-                      image: user?.image
+                      username,
+                      email,
+                      image
                     })
                   })
                   return true
